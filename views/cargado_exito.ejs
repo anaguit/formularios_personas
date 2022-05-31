@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./parciales/head.ejs") %>
+    <body>
+        <%- include("./parciales/header.ejs") %>
+        <main>
+            <h3 class="titulo_descargado">¡Archivos cargados con éxito!</h3>
+            <div class="contenedor_descarga">
+                <a href="/descargar/<%= nombre_archivo %>" class="descargar">Descargar formulario</a>
+                <form action="/" method="POST">
+                    <button type="submit" class="finalizar">Finalizar</button>
+                </form>
+            </div>
+        </main>
+    </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./parciales/head.ejs") %>
+    <body>
+        <%- include("./parciales/header.ejs") %>
+        <main>
+            <h1 class="titulo_formulario">Formulario persona juridica</h1>
+            <form action ="/persona_juridica" method="POST" enctype="multipart/form-data" class="formulario">
+                <div class="contenedor_formulario">
+                    <div class="inputs_1">
+                        <div class="campos_formulario">
+                            <label>Adjuntar formulario de persona jurídica (.pdf)</label>
+                            <input type="file" name="formulario_juridica" accept=".pdf">
+                        </div>
+                        <div class="campos_formulario">
+                            <label>Constancia AFIP (.pdf)</label>
+                            <input type="file" name="afip" accept=".pdf">
+                        </div>
+                        <div class="campos_formulario">
+                            <label>Certificado MiPyme (.pdf)</label>
+                            <input type="file" name="mi_pyme" accept=".pdf">
+                        </div>
+                        <div class="campos_formulario">
+                            <label>Estatuto social (.pdf)</label>
+                            <input type="file" name="estatuto_social" accept=".pdf">
+                        </div>
+                    </div>
+                    <div class="inputs_2">
+                        <div class="campos_formulario">
+                            <label>última acta de asignación de autoridades (.pdf)</label>
+                            <input type="file" name="acta_asignacion" accept=".pdf">
+                        </div>
+                        <div class="campos_formulario">
+                            <label>Servicio público con domicilio del local (.jpeg/.jpg)</label>
+                            <input type="file" name="servicio" accept=".jpeg, .jpg">
+                        </div>
+                        <div class="campos_formulario">
+                            <label>Foto del local (.jpeg/.jpg)</label>
+                            <input type="file" name="foto_local" accept=".jpeg, .jpg">
+                        </div>
+                        <div class="campos_formulario">
+                            <label>Foto del local 2 (.jpeg/.jpg)</label>
+                            <input type="file" name="foto_local_2" accept=".jpeg, .jpg">
+                        </div>
+                    </div>
+                </div>
+                <div class="botones_formulario">
+                    <button type="reset" class="boton_formulario">Cancelar</button>
+                    <button type="submit" class="boton_formulario">Enviar</button>
+                </div>
+            </form>
+        </main>
+        <%- include("./parciales/footer.ejs") %>
+    </body>
+</html>
