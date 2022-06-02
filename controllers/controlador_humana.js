@@ -134,6 +134,51 @@ let controlador_humana = {
             height: imagen_tamano_5.height,
           });
         };
+
+        if(req.files.nosis){
+
+          let input_nosis = await req.files.nosis;
+          let nombre_archivo_9 = await input_nosis.name + Date.now() + path.extname(input_nosis.name);
+          await input_nosis.mv(path.resolve(__dirname,"../public/imagenes",nombre_archivo_9));
+
+          let nosis = await PDFDocument.load(readFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo_9)));
+          let copiar_nosis = await archivo_final.copyPages(nosis, nosis.getPageIndices());
+          copiar_nosis.forEach((page) => archivo_final.addPage(page));
+        };
+
+        if(req.files.opcional_1){
+
+          let input_opcional_1 = await req.files.opcional_1;
+          let nombre_archivo_10 = await input_opcional_1.name + Date.now() + path.extname(input_opcional_1.name);
+          await input_opcional_1.mv(path.resolve(__dirname,"../public/imagenes",nombre_archivo_10));
+
+          let opcional_1 = await PDFDocument.load(readFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo_10)));
+          let copiar_opcional_1 = await archivo_final.copyPages(opcional_1, opcional_1.getPageIndices());
+          copiar_opcional_1.forEach((page) => archivo_final.addPage(page));
+        };
+
+        if(req.files.opcional_2){
+
+          let input_opcional_2 = await req.files.opcional_2;
+          let nombre_archivo_11 = await input_opcional_2.name + Date.now() + path.extname(input_opcional_2.name);
+          await input_opcional_2.mv(path.resolve(__dirname,"../public/imagenes",nombre_archivo_11));
+
+          let opcional_2 = await PDFDocument.load(readFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo_11)));
+          let copiar_opcional_2 = await archivo_final.copyPages(opcional_2, opcional_2.getPageIndices());
+          copiar_opcional_2.forEach((page) => archivo_final.addPage(page));
+        };
+
+        if(req.files.opcional_3){
+
+          let input_opcional_3 = await req.files.opcional_3;
+          let nombre_archivo_12 = await input_opcional_3.name + Date.now() + path.extname(input_opcional_3.name);
+          await input_opcional_3.mv(path.resolve(__dirname,"../public/imagenes",nombre_archivo_12));
+
+          let opcional_3 = await PDFDocument.load(readFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo_12)));
+          let copiar_opcional_3 = await archivo_final.copyPages(opcional_3, opcional_3.getPageIndices());
+          copiar_opcional_3.forEach((page) => archivo_final.addPage(page));
+        };
+
         console.log(req.files)
         let nombre_archivo = Date.now() + "archivo_final.pdf";
         writeFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo), await archivo_final.save())
