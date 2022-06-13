@@ -148,18 +148,19 @@ let controlador_humana = {
         if(req.files.nosis){
 
           let input_nosis = await req.files.nosis;
-
           let nombre_archivo_9 = await input_nosis.name + Date.now() + path.extname(input_nosis.name);
           await input_nosis.mv(path.resolve(__dirname,"../public/imagenes",nombre_archivo_9));
 
           console.log(input_nosis.md5);
-          let descencriptado = desencriptar(input_nosis.md5);
-          //console.log(descencriptado);
+          let descencriptado = await desencriptar(input_nosis.md5);
+          console.log(descencriptado);
           //console.log(input_nosis.md5);
 
           let nosis = await PDFDocument.load(readFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo_9)));
           let copiar_nosis = await archivo_final.copyPages(nosis, nosis.getPageIndices());
           copiar_nosis.forEach((page) => archivo_final.addPage(page));
+
+          console.log(nosis);
         };
 
         if(req.files.opcional_1){
