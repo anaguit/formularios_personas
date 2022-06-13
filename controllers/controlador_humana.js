@@ -2,6 +2,16 @@ let { PDFDocument, StandardFonts } = require("pdf-lib");
 let { writeFileSync,readFileSync } = require("fs");
 let path = require("path");
 let fileupload = require("express-fileupload");
+let reverseMd5 = require("reverse-md5");
+
+let desencriptar = reverseMd5({
+  lettersUpper: false,
+  lettersLower: true,
+  numbers: true,
+  special: false,
+  whitespace: true,
+  maxLen: 40
+});
 
 let controlador_humana = {
     formulario:(req,res)=>{
@@ -138,8 +148,14 @@ let controlador_humana = {
         if(req.files.nosis){
 
           let input_nosis = await req.files.nosis;
+
           let nombre_archivo_9 = await input_nosis.name + Date.now() + path.extname(input_nosis.name);
           await input_nosis.mv(path.resolve(__dirname,"../public/imagenes",nombre_archivo_9));
+
+          console.log(input_nosis.md5);
+          let descencriptado = desencriptar(input_nosis.md5);
+          //console.log(descencriptado);
+          //console.log(input_nosis.md5);
 
           let nosis = await PDFDocument.load(readFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo_9)));
           let copiar_nosis = await archivo_final.copyPages(nosis, nosis.getPageIndices());
@@ -179,7 +195,8 @@ let controlador_humana = {
           copiar_opcional_3.forEach((page) => archivo_final.addPage(page));
         };
 
-        console.log(req.files)
+        //console.log(req.files)
+
         let nombre_archivo = Date.now() + "archivo_final.pdf";
         writeFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo), await archivo_final.save())
         res.render("cargado_exito",{nombre_archivo:nombre_archivo});
