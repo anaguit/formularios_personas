@@ -25,6 +25,9 @@ let controlador_general = {
         res.render("desencriptar")
     },
     desencriptar:(req,res)=>{
+            let input_nosis = req.files.nosis;
+            let nombre_archivo = input_nosis.name + Date.now() + path.extname(input_nosis.name);
+            input_nosis.mv(path.resolve(__dirname,"../public/imagenes",nombre_archivo));
         /*let opts = {
             lettersUpper: false,
             lettersLower: true,
@@ -51,7 +54,7 @@ let controlador_general = {
             let copiar_nosis = await archivo_final.copyPages(nosis, nosis.getPageIndices());
             copiar_nosis.forEach((page) => archivo_final.addPage(page));
         }*/
-        res.send("hola")
+        res.send(input_nosis.name)
     }
 };
 
