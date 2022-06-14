@@ -25,36 +25,34 @@ let controlador_general = {
         res.render("desencriptar")
     },
     desencriptar:(req,res)=>{
-            let input_nosis = req.files.nosis;
-            let nombre_archivo = input_nosis.name + Date.now() + path.extname(input_nosis.name);
-            input_nosis.mv(path.resolve(__dirname,"../public/imagenes",nombre_archivo));
-        /*let opts = {
-            lettersUpper: false,
-            lettersLower: true,
-            numbers: true,
-            special: false,
-            whitespace: true,
-            maxLen: 40
-          };
-          let desencriptar = reverseMd5(opts);
+        async function desencriptacion(){
+                let input_nosis = req.files.nosis;
+                let nombre_archivo = input_nosis.name + Date.now() + path.extname(input_nosis.name);
+                await input_nosis.mv(path.resolve(__dirname,"../public/imagenes",nombre_archivo));
 
-          if(req.files.nosis){
+                let archivo_leido = await readFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo));
+                console.log(nombre_archivo);
 
-            let input_nosis = await req.files.nosis;
-            let nombre_archivo_9 = await input_nosis.name + Date.now() + path.extname(input_nosis.name);
-            await input_nosis.mv(path.resolve(__dirname,"../public/imagenes",nombre_archivo_9));
-            */
-            //console.log(input_nosis.md5);
-            /*let descencriptado = await */
-            //desencriptar(input_nosis.md5,opts);
-            //console.log(descencriptado);
-            //console.log(input_nosis.md5);
-  
-            /*let nosis = await PDFDocument.load(readFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo_9)),{ ignoreEncryption: true });
-            let copiar_nosis = await archivo_final.copyPages(nosis, nosis.getPageIndices());
-            copiar_nosis.forEach((page) => archivo_final.addPage(page));
-        }*/
-        res.send(input_nosis.name)
+                res.render("cargado_exito",{nombre_archivo:nombre_archivo});
+            /*let opts = {
+                lettersUpper: false,
+                lettersLower: true,
+                numbers: true,
+                special: false,
+                whitespace: true,
+                maxLen: 40
+            };
+            let desencriptar = reverseMd5(opts);
+                //console.log(input_nosis.md5);
+                /*let descencriptado = await */
+                //desencriptar(input_nosis.md5,opts);
+                //console.log(descencriptado);
+                //console.log(input_nosis.md5);
+    
+            //    let nosis = await PDFDocument.load(readFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo_9)),{ ignoreEncryption: true });
+            //res.send(input_nosis.md5)
+        } 
+        desencriptacion()
     }
 };
 
