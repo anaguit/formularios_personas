@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./parciales/head.ejs") %>
+<body>
+    <%- include("./parciales/header.ejs") %>
+    <main>
+        <h2>Desencripte el archivo</h2>
+        <form action="/desencriptar" method="POST" enctype="multipart/form-data">
+            <label>Adjuntar archivo</label>
+            <input type="file" name="nosis">
+            <button type="submit">Convertir</button>
+            <button type="reset">Cancelar</button>
+        </form>
+    </main>
+</body>
+</html>

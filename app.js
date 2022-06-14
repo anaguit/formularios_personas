@@ -20,6 +20,8 @@ app.listen(process.env.PORT||3000,()=>{console.log("servidor corriendo")});
 app.get("/",controlador_general.inicio);
 app.post("/",controlador_general.limpiar_archivos);
 app.get("/descargar/:archivo",controlador_general.descargar);
+app.get("/desencriptar",controlador_general.vista_desencriptar)
+app.post("/desencriptar",controlador_general.desencriptar);
 
 //persona_juridica
 app.get("/persona_juridica",controlador_juridica.formulario);
