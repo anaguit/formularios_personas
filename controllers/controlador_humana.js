@@ -192,12 +192,38 @@ let controlador_humana = {
           let input_opcional_3 = await req.files.opcional_3;
           let nombre_archivo_12 = await input_opcional_3.name + Date.now() + path.extname(input_opcional_3.name);
           await input_opcional_3.mv(path.resolve(__dirname,"../public/imagenes",nombre_archivo_12));
-
+      
           let opcional_3 = await PDFDocument.load(readFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo_12)));
           let copiar_opcional_3 = await archivo_final.copyPages(opcional_3, opcional_3.getPageIndices());
           copiar_opcional_3.forEach((page) => archivo_final.addPage(page));
         };
 
+
+
+        // lógica de nuevos inputs
+
+        if(req.files.opcional_4){
+
+          let input_opcional_4 = await req.files.opcional_4;
+          let nombre_archivo_13 = await input_opcional_4.name + Date.now() + path.extname(input_opcional_4);
+          await input_opcional_4.mv(path.resolve(__dirname,"../public/imagenes",nombre_archivo_13));
+
+          let opcional_4 = await PDFDocument.load(readFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo_13)));
+          let copiar_opcional_4 = await archivo_final.copyPages(opcional_4,opcional_4.getPagesIndices());
+          copiar_opcional_4.forEach((page)=> archivo_final.addPage(page));
+        };
+        
+        if(req.files.opcional_5){
+
+          let input_opcional_5 = await req.files.opcional_5;
+          let nombre_archivo_14 = await input_opcional_5.name + Date.now() + path.extname(input_opcional_5.name);
+          await input_opcional_5.mv(path.resolve(__dirname,"../public/imagenes",nombre_archivo_14));
+
+          let opcional_5 = await PDFDocument.load(readFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo_14)));
+          let copiar_opcional_5 = await archivo_final.copyPages(opcional_5,opcional_5.getPageIndices());
+          copiar_opcional_5.forEach((page)=> archivo_final.addPages(page));
+        };
+        
         //console.log(req.files)
 
         let nombre_archivo = Date.now() + "archivo_final.pdf";
