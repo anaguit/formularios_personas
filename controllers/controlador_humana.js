@@ -369,17 +369,6 @@ let controlador_humana = {
           copiar_opcional_18.forEach((page)=> archivo_final.addPages(page));
         };
 
-        if(req.files.opcional_19){
-
-          let input_opcional_19 = await req.files.opcional_19;
-          let nombre_archivo_28 = await input_opcional_19.name + Date.now() + path.extname(input_opcional_19.name);
-          await input_opcional_19.mv(path.resolve(__dirname,"../public/imagenes",nombre_archivo_28));
-
-          let opcional_19 = await PDFDocument.load(readFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo_28)));
-          let copiar_opcional_19 = await archivo_final.copyPages(opcional_19,opcional_19.getPageIndices());
-          copiar_opcional_19.forEach((page)=> archivo_final.addPages(page));
-        };
-
         console.log(req.files)
 
         let nombre_archivo = Date.now() + "archivo_final.pdf";
