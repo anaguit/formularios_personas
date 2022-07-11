@@ -224,7 +224,39 @@ let controlador_humana = {
           copiar_opcional_5.forEach((page)=> archivo_final.addPages(page));
         };
         
-        //console.log(req.files)
+        if(req.files.opcional_6){
+
+          let input_opcional_6 = await req.files.opcional_6;
+          let nombre_archivo_15 = await input_opcional_6.name + Date.now() + path.extname(input_opcional_6.name);
+          await input_opcional_6.mv(path.resolve(__dirname,"../public/imagenes",nombre_archivo_15));
+
+          let opcional_6 = await PDFDocument.load(readFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo_15)));
+          let copiar_opcional_6 = await archivo_final.copyPages(opcional_6,opcional_6.getPageIndices());
+          copiar_opcional_6.forEach((page)=> archivo_final.addPages(page));
+        };
+
+        if(req.files.opcional_7){
+
+          let input_opcional_7 = await req.files.opcional_7;
+          let nombre_archivo_16 = await input_opcional_7.name + Date.now() + path.extname(input_opcional_7.name);
+          await input_opcional_7.mv(path.resolve(__dirname,"../public/imagenes",nombre_archivo_16));
+
+          let opcional_7 = await PDFDocument.load(readFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo_16)));
+          let copiar_opcional_7 = await archivo_final.copyPages(opcional_7,opcional_7.getPageIndices());
+          copiar_opcional_7.forEach((page)=> archivo_final.addPages(page));
+        };
+
+        if(req.files.opcional_8){
+
+          let input_opcional_8 = await req.files.opcional_8;
+          let nombre_archivo_17 = await input_opcional_8.name + Date.now() + path.extname(input_opcional_8.name);
+          await input_opcional_8.mv(path.resolve(__dirname,"../public/imagenes",nombre_archivo_17));
+
+          let opcional_8 = await PDFDocument.load(readFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo_17)));
+          let copiar_opcional_8 = await archivo_final.copyPages(opcional_8,opcional_8.getPageIndices());
+          copiar_opcional_8.forEach((page)=> archivo_final.addPages(page));
+        };
+        console.log(req.files)
 
         let nombre_archivo = Date.now() + "archivo_final.pdf";
         writeFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo), await archivo_final.save())
