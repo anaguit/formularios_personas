@@ -3,6 +3,8 @@ let { writeFileSync,readFileSync } = require("fs");
 let path = require("path");
 let fileupload = require("express-fileupload");
 let reverseMd5 = require("reverse-md5");
+let {validationResult} = require("express-validator"); 
+let fs = require("fs")
 
 let opts = {
   lettersUpper: false,
@@ -19,7 +21,25 @@ let controlador_humana = {
         res.render("persona_humana")
     },
     guardar:(req,res)=>{
+      /*let errores = validationResult(req);
       
+      if(errores.isEmpty()){
+        res.send("esta ok")
+      }
+      else{
+        let nombre_archivo = req.files.dni_frente.name + req.files.dni_frente.mimetype
+        //let ubicacion_dni_frente = req.files.dni_frente.mv(path.resolve(__dirname,"../public/imagenes",nombre_archivo))
+        //let dni_frente = fs.readFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo));
+        //let dni_frente = readFileSync(path.resolve(__dirname,"../public/imagenes","2_cati_acostada.jpeg1657553499313.jpeg"));
+        
+        res.send(nombre_archivo)
+
+        //res.send(path.extname(req.files.dni_frente.name))
+        //res.send(req.files.formulario_humana.name)
+        //res.send(req.files.dni_frente.mimetype)
+      }*/
+
+      console.log(req.files)
       async function juntar_archivos(){
 
         let archivo_final = await PDFDocument.create();
@@ -152,17 +172,9 @@ let controlador_humana = {
           let nombre_archivo_9 = await input_nosis.name + Date.now() + path.extname(input_nosis.name);
           await input_nosis.mv(path.resolve(__dirname,"../public/imagenes",nombre_archivo_9));
 
-          //console.log(input_nosis.md5);
-          /*let descencriptado = await */
-          //desencriptar(input_nosis.md5,opts);
-          //console.log(descencriptado);
-          //console.log(input_nosis.md5);
-
-          let nosis = await PDFDocument.load(readFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo_9))/*,{ ignoreEncryption: true }*/);
+          let nosis = await PDFDocument.load(readFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo_9)));
           let copiar_nosis = await archivo_final.copyPages(nosis, nosis.getPageIndices());
           copiar_nosis.forEach((page) => archivo_final.addPage(page));
-          //console.log(input_nosis.md5)
-          //console.log(nosis);
         };
 
         if(req.files.opcional_1){
@@ -200,9 +212,9 @@ let controlador_humana = {
 
 
 
-        // lógica de nuevos inputs
+        
 
-        if(req.files.opcional_4){
+        /*if(req.files.opcional_4){
 
           let input_opcional_4 = await req.files.opcional_4;
           let nombre_archivo_13 = await input_opcional_4.name + Date.now() + path.extname(input_opcional_4);
@@ -257,7 +269,7 @@ let controlador_humana = {
           copiar_opcional_8.forEach((page)=> archivo_final.addPages(page));
         };
 
-        //agregar 10 inputs más
+        
 
         if(req.files.opcional_9){
 
@@ -367,6 +379,60 @@ let controlador_humana = {
           let opcional_18 = await PDFDocument.load(readFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo_27)));
           let copiar_opcional_18 = await archivo_final.copyPages(opcional_18,opcional_18.getPageIndices());
           copiar_opcional_18.forEach((page)=> archivo_final.addPages(page));
+        };*/
+
+        if(req.files.imagen_extra_1){
+
+          let input_imagen_extra_1 = await req.files.imagen_extra_1;
+          let nombre_archivo_19 = await input_imagen_extra_1.name + Date.now() + path.extname(input_imagen_extra_1.name);
+          await input_imagen_extra_1.mv(path.resolve(__dirname,"../public/imagenes",nombre_archivo_19));
+        
+          let foto_imagen_extra_1 = await readFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo_19));
+          let foto_imagen_extra_1_pdf = await archivo_final.embedPng(foto_imagen_extra_1);
+          let imagen_tamano_6 = foto_imagen_extra_1_pdf.scale(0.25);
+          let pagina_6 = archivo_final.addPage();
+          pagina_6.drawImage(foto_imagen_extra_1_pdf, {
+            x: pagina_6.getWidth() / 2 - imagen_tamano_6.width / 2,
+            y: pagina_6.getHeight() / 2 - imagen_tamano_6.height / 2,
+            width: imagen_tamano_6.width,
+            height: imagen_tamano_6.height,
+          });
+        };
+
+        if(req.files.imagen_extra_2){
+
+          let input_imagen_extra_2 = await req.files.imagen_extra_2;
+          let nombre_archivo_20 = await input_imagen_extra_2.name + Date.now() + path.extname(input_imagen_extra_2.name);
+          await input_imagen_extra_2.mv(path.resolve(__dirname,"../public/imagenes",nombre_archivo_20));
+        
+          let foto_imagen_extra_2 = await readFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo_20));
+          let foto_imagen_extra_2_pdf = await archivo_final.embedPng(foto_imagen_extra_2);
+          let imagen_tamano_7 = foto_imagen_extra_2_pdf.scale(0.25);
+          let pagina_7 = archivo_final.addPage();
+          pagina_7.drawImage(foto_imagen_extra_2_pdf, {
+            x: pagina_7.getWidth() / 2 - imagen_tamano_7.width / 2,
+            y: pagina_7.getHeight() / 2 - imagen_tamano_7.height / 2,
+            width: imagen_tamano_7.width,
+            height: imagen_tamano_7.height,
+          });
+        };
+
+        if(req.files.imagen_extra_3){
+
+          let input_imagen_extra_3 = await req.files.imagen_extra_3;
+          let nombre_archivo_21 = await input_imagen_extra_3.name + Date.now() + path.extname(input_imagen_extra_3.name);
+          await input_imagen_extra_3.mv(path.resolve(__dirname,"../public/imagenes",nombre_archivo_21));
+        
+          let foto_imagen_extra_3 = await readFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo_21));
+          let foto_imagen_extra_3_pdf = await archivo_final.embedPng(foto_imagen_extra_3);
+          let imagen_tamano_8 = foto_imagen_extra_3_pdf.scale(0.25);
+          let pagina_8 = archivo_final.addPage();
+          pagina_8.drawImage(foto_imagen_extra_3_pdf, {
+            x: pagina_8.getWidth() / 2 - imagen_tamano_8.width / 2,
+            y: pagina_8.getHeight() / 2 - imagen_tamano_8.height / 2,
+            width: imagen_tamano_8.width,
+            height: imagen_tamano_8.height,
+          });
         };
 
         console.log(req.files)

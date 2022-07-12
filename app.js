@@ -7,6 +7,8 @@ let controlador_juridica = require("./controllers/controlador_juridica");
 let controlador_humana = require("./controllers/controlador_humana");
 let controlador_general = require("./controllers/controlador_general");
 
+//let validaciones_humana = require("./validaciones/validacion_humana");
+
 app.use(express.static(path.resolve(__dirname,"./public")))
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
@@ -27,4 +29,4 @@ app.post("/persona_juridica", controlador_juridica.guardar);
 
 //persona_humana
 app.get("/persona_humana",controlador_humana.formulario);
-app.post("/persona_humana", controlador_humana.guardar);
+app.post("/persona_humana"/*, validaciones_humana*/, controlador_humana.guardar);
