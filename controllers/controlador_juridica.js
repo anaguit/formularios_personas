@@ -335,6 +335,60 @@ let controlador_juridica = {
           copiar_opcional_18.forEach((page) => archivo_final.addPage(page));
         };
 
+        if(req.files.imagen_extra_1){
+
+          let input_imagen_extra_1 = await req.files.imagen_extra_1;
+          let nombre_archivo_19 = await input_imagen_extra_1.name + Date.now() + path.extname(input_imagen_extra_1.name);
+          await input_imagen_extra_1.mv(path.resolve(__dirname,"../public/imagenes",nombre_archivo_19));
+        
+          let foto_imagen_extra_1 = await readFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo_19));
+          let foto_imagen_extra_1_pdf = await archivo_final.embedPng(foto_imagen_extra_1);
+          let imagen_tamano_6 = foto_imagen_extra_1_pdf.scale(0.25);
+          let pagina_6 = archivo_final.addPage();
+          pagina_6.drawImage(foto_imagen_extra_1_pdf, {
+            x: pagina_6.getWidth() / 2 - imagen_tamano_6.width / 2,
+            y: pagina_6.getHeight() / 2 - imagen_tamano_6.height / 2,
+            width: imagen_tamano_6.width,
+            height: imagen_tamano_6.height,
+          });
+        };
+
+        if(req.files.imagen_extra_2){
+
+          let input_imagen_extra_2 = await req.files.imagen_extra_2;
+          let nombre_archivo_20 = await input_imagen_extra_2.name + Date.now() + path.extname(input_imagen_extra_2.name);
+          await input_imagen_extra_2.mv(path.resolve(__dirname,"../public/imagenes",nombre_archivo_20));
+        
+          let foto_imagen_extra_2 = await readFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo_20));
+          let foto_imagen_extra_2_pdf = await archivo_final.embedPng(foto_imagen_extra_2);
+          let imagen_tamano_7 = foto_imagen_extra_2_pdf.scale(0.25);
+          let pagina_7 = archivo_final.addPage();
+          pagina_7.drawImage(foto_imagen_extra_2_pdf, {
+            x: pagina_7.getWidth() / 2 - imagen_tamano_7.width / 2,
+            y: pagina_7.getHeight() / 2 - imagen_tamano_7.height / 2,
+            width: imagen_tamano_7.width,
+            height: imagen_tamano_7.height,
+          });
+        };
+
+        if(req.files.imagen_extra_3){
+
+          let input_imagen_extra_3 = await req.files.imagen_extra_3;
+          let nombre_archivo_21 = await input_imagen_extra_3.name + Date.now() + path.extname(input_imagen_extra_3.name);
+          await input_imagen_extra_3.mv(path.resolve(__dirname,"../public/imagenes",nombre_archivo_21));
+        
+          let foto_imagen_extra_3 = await readFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo_21));
+          let foto_imagen_extra_3_pdf = await archivo_final.embedPng(foto_imagen_extra_3);
+          let imagen_tamano_8 = foto_imagen_extra_3_pdf.scale(0.25);
+          let pagina_8 = archivo_final.addPage();
+          pagina_8.drawImage(foto_imagen_extra_3_pdf, {
+            x: pagina_8.getWidth() / 2 - imagen_tamano_8.width / 2,
+            y: pagina_8.getHeight() / 2 - imagen_tamano_8.height / 2,
+            width: imagen_tamano_8.width,
+            height: imagen_tamano_8.height,
+          });
+        };
+
         console.log(req.files);     
         let nombre_archivo = Date.now() + "archivo_final.pdf";
         writeFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo), await archivo_final.save());
