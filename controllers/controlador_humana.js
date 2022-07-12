@@ -5,6 +5,8 @@ let fileupload = require("express-fileupload");
 let reverseMd5 = require("reverse-md5");
 let {validationResult} = require("express-validator"); 
 let fs = require("fs")
+const readChunk = import('read-chunk')
+let image_type = require("image-type");
 
 let opts = {
   lettersUpper: false,
@@ -27,21 +29,11 @@ let controlador_humana = {
         res.send("esta ok")
       }
       else{
-        let nombre_archivo = req.files.dni_frente.name + req.files.dni_frente.mimetype
-        //let ubicacion_dni_frente = req.files.dni_frente.mv(path.resolve(__dirname,"../public/imagenes",nombre_archivo))
-        //let dni_frente = fs.readFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo));
-        //let dni_frente = readFileSync(path.resolve(__dirname,"../public/imagenes","2_cati_acostada.jpeg1657553499313.jpeg"));
         
-        res.send(nombre_archivo)
-
-        //res.send(path.extname(req.files.dni_frente.name))
-        //res.send(req.files.formulario_humana.name)
-        //res.send(req.files.dni_frente.mimetype)
       }*/
-
       console.log(req.files)
       async function juntar_archivos(){
-
+        
         let archivo_final = await PDFDocument.create();
       
         if(req.files.formulario_humana){
@@ -209,7 +201,7 @@ let controlador_humana = {
           let copiar_opcional_3 = await archivo_final.copyPages(opcional_3, opcional_3.getPageIndices());
           copiar_opcional_3.forEach((page) => archivo_final.addPage(page));
         };
-
+        
 
 
         
@@ -380,7 +372,7 @@ let controlador_humana = {
           let copiar_opcional_18 = await archivo_final.copyPages(opcional_18,opcional_18.getPageIndices());
           copiar_opcional_18.forEach((page)=> archivo_final.addPages(page));
         };*/
-
+        
         if(req.files.imagen_extra_1){
 
           let input_imagen_extra_1 = await req.files.imagen_extra_1;
@@ -434,14 +426,14 @@ let controlador_humana = {
             height: imagen_tamano_8.height,
           });
         };
-
-        console.log(req.files)
+        
+        console.log(req.files.dni_frente.data)
 
         let nombre_archivo = Date.now() + "archivo_final.pdf";
         writeFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo), await archivo_final.save())
         res.render("cargado_exito",{nombre_archivo:nombre_archivo});
       }
-      juntar_archivos().catch((err) => console.log(err)); 
+      juntar_archivos().catch((err) => console.log(err));
     }
 };
 
