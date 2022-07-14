@@ -206,7 +206,7 @@ let controlador_humana = {
 
         
 
-        /*if(req.files.opcional_4){
+        if(req.files.opcional_4){
 
           let input_opcional_4 = await req.files.opcional_4;
           let nombre_archivo_13 = await input_opcional_4.name + Date.now() + path.extname(input_opcional_4);
@@ -371,7 +371,7 @@ let controlador_humana = {
           let opcional_18 = await PDFDocument.load(readFileSync(path.resolve(__dirname,"../public/imagenes",nombre_archivo_27)));
           let copiar_opcional_18 = await archivo_final.copyPages(opcional_18,opcional_18.getPageIndices());
           copiar_opcional_18.forEach((page)=> archivo_final.addPages(page));
-        };*/
+        };
         
         if(req.files.imagen_extra_1){
 
